@@ -36,13 +36,30 @@ var findFirstVowel = function(wordArray) {
 }
 
 var consonantMove = function(wordArray) {
-  // takes !! single !! first consonants and moves them to the end of the word
+  // takes first consonants and moves them to the end of the word
   var vowelIndex = findFirstVowel(wordArray);
   console.log(vowelIndex);
-  wordArray.push(wordArray[0]);
-  wordArray.splice(0,1);
+  var firstConsonants = (wordArray.splice(0,vowelIndex)).join("");
+  if (qChecker(firstConsonants, wordArray) === true) {
+    var you = (wordArray.splice(0,1)).join("");
+    firstConsonants = firstConsonants + you;
+  }
+  wordArray.push(firstConsonants);
   var newWord = wordArray.join("");
   return newWord;
+}
+
+var qChecker = function(firstConsonants, reducedWordArray) {
+  // checks if there is a "qu" in the consonant string, returns false if there is not
+  var qCheckIndex = (firstConsonants.length-1);
+  if (firstConsonants[qCheckIndex] === "q" || firstConsonants[qCheckIndex] === "Q") {
+    if (reducedWordArray[0] === "u" || reducedWordArray[0] === "U") {
+      return true
+    }
+  }
+  else {
+    return false;
+  }
 }
 
 
