@@ -21,8 +21,33 @@ var splitWords = function(aString) {
     }
   }
   compositeArray.push(groupedArray);
-  console.log(compositeArray);
-  return compositeArray;
+  console.log(compositeStrings(compositeArray));
+  return compositeStrings(compositeArray);
+}
+
+var compositeStrings = function(compositeArray) {
+  var arrayOfWords = [];
+  for(var index = 0; index < compositeArray.length; index++) {
+    var word = compositeArray[index].join("");
+    arrayOfWords.push(word);
+  }
+  return arrayOfWords;
+}
+
+var pigLatinTranslate = function(userInput) {
+  var bigArray = splitWords(userInput);
+  var bigEmptyArray = [];
+  for(var index = 0; index < bigArray.length; index++) {
+    var isLetter = checkForLetter(bigArray[index].charAt(0));
+    if (isLetter === true) {
+      var word = translate(bigArray[index]);
+      bigEmptyArray.push(word);
+    }
+    else {
+      bigEmptyArray.push(bigArray[index]);
+    }
+  }
+  return bigEmptyArray.join("");
 }
 
 var checkForLetter = function(character) {
@@ -99,7 +124,7 @@ $(document).ready(function() {
   $("form#input-form").submit(function(event) {
     event.preventDefault();
     var userInput = $("#text-input").val();
-    var output = splitWords(userInput);
+    var output = pigLatinTranslate(userInput);
     $("#translation").text(output);
 
   });
