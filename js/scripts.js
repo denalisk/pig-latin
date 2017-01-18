@@ -7,7 +7,8 @@ var translate = function(word) {
     return (word + "ay");
   }
   else {
-    return (consonantMove(word) + "ay");
+    var wordArray = word.split("");
+    return (consonantMove(wordArray) + "ay");
   }
 }
 
@@ -23,9 +24,21 @@ var vowelCheck = function(letter) {
   return vowel;
 };
 
-var consonantMove = function(word) {
+var findFirstVowel = function(wordArray) {
+  for(var wordArrayIndex = 0; wordArrayIndex < wordArray.length; wordArrayIndex++) {
+    for(var vowelIndex = 0; vowelIndex < vowels.length; vowelIndex ++) {
+      if (wordArray[wordArrayIndex] === vowels[vowelIndex]) {
+        return wordArrayIndex;
+      }
+    }
+  }
+  return false;
+}
+
+var consonantMove = function(wordArray) {
   // takes !! single !! first consonants and moves them to the end of the word
-  var wordArray = word.split("");
+  var vowelIndex = findFirstVowel(wordArray);
+  console.log(vowelIndex);
   wordArray.push(wordArray[0]);
   wordArray.splice(0,1);
   var newWord = wordArray.join("");
