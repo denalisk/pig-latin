@@ -27,7 +27,7 @@ var vowelCheck = function(letter) {
 var findFirstVowel = function(wordArray) {
   for(var wordArrayIndex = 0; wordArrayIndex < wordArray.length; wordArrayIndex++) {
     for(var vowelIndex = 0; vowelIndex < vowels.length; vowelIndex ++) {
-      if (wordArray[wordArrayIndex] === vowels[vowelIndex]) {
+      if (wordArray[wordArrayIndex] === vowels[vowelIndex] || wordArray[wordArrayIndex] === "y" || wordArray[wordArrayIndex] === "Y") {
         return wordArrayIndex;
       }
     }
