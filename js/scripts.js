@@ -3,8 +3,7 @@ var vowels = ["e", "u", "i", "o", "a", "E", "A", "I", "O", "U"]
 var y = ["y", "Y"]
 
 var translate = function(word) {
-  console.log(vowelCheck(word));
-  if (vowelCheck(word) === true) {
+  if (vowelCheck(word.charAt(0)) === true) {
     return (word + "ay");
   }
   else {
@@ -12,11 +11,11 @@ var translate = function(word) {
   }
 }
 
-var vowelCheck = function(word) {
+var vowelCheck = function(letter) {
   // check for first character being a vowel
   var vowel = false;
   for(var index = 0; index < vowels.length; index ++) {
-    if (vowels[index] === word.charAt(0)) {
+    if (vowels[index] === letter) {
       vowel = true;
       return vowel;
     }
