@@ -1,6 +1,38 @@
 var consonants = ["q", "w", "r", "t", "p", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m", "Q", "W", "R", "T", "P", "S", "D", "F", "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M"]
 var vowels = ["e", "u", "i", "o", "a", "E", "A", "I", "O", "U"]
 var y = ["y", "Y"]
+var allLegalChars = ["q", "w", "r", "t", "p", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m", "Q", "W", "R", "T", "P", "S", "D", "F", "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M","e", "u", "i", "o", "a", "E", "A", "I", "O", "U","y","Y","'"]
+
+var splitWords = function(aString) {
+  var stringArray = aString.split("");
+  var state = checkForLetter(stringArray[0]);
+  var compositeArray = [];
+  var groupedArray = [];
+  for (var index = 0; index < stringArray.length; index++) {
+    if (checkForLetter(stringArray[index]) === state) {
+      groupedArray.push(stringArray[index]);
+    }
+    else {
+      compositeArray.push(groupedArray);
+      console.log(groupedArray);
+      groupedArray = [];
+      groupedArray.push(stringArray[index]);
+      state = checkForLetter(stringArray[index]);
+    }
+  }
+  compositeArray.push(groupedArray);
+  console.log(compositeArray);
+  return compositeArray;
+}
+
+var checkForLetter = function(character) {
+  for (var index = 0; index < allLegalChars.length; index++) {
+    if (character === allLegalChars[index]) {
+      return true;
+    }
+  }
+  return false;
+}
 
 var translate = function(word) {
   if (vowelCheck(word.charAt(0)) === true) {
@@ -67,7 +99,7 @@ $(document).ready(function() {
   $("form#input-form").submit(function(event) {
     event.preventDefault();
     var userInput = $("#text-input").val();
-    var output = translate(userInput);
+    var output = splitWords(userInput);
     $("#translation").text(output);
 
   });
