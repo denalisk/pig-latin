@@ -1,0 +1,16 @@
+#input-form, button, {
+  padding: 50px;
+}
+
+.btn {
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.results {
+  margin-top: 50px;
+}
+
+.jumbotron {
+  height: 500px;
+}
